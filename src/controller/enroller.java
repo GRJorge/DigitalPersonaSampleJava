@@ -14,7 +14,8 @@ import com.digitalpersona.onetouch.processing.DPFPImageQualityException;
  */
 public class enroller {
 
-    private static final DPFPEnrollment enrollment = DPFPGlobal.getEnrollmentFactory().createEnrollment();
+    public static final DPFPEnrollment enrollment = DPFPGlobal.getEnrollmentFactory().createEnrollment();
+
     private static DPFPTemplate template;
     private static DPFPFeatureSet featuresInscription;
 
@@ -46,14 +47,9 @@ public class enroller {
         }
     }
 
-    private static void setTemplate(DPFPTemplate Template) {
+    public static void setTemplate(DPFPTemplate Template) {
         //ESTE DATO ES EL QUE SE GUARDA EN BASE DE DATOS
         template = Template;
-        byte[] templateData = enrollment.getTemplate().serialize();
-
-        for (byte b : templateData) {
-            System.out.print(b); // Imprime cada byte en formato hexadecimal
-        }
     }
 
     private static void state() {

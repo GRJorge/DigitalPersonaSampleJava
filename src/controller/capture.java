@@ -9,7 +9,11 @@ import com.digitalpersona.onetouch.capture.event.DPFPReaderStatusEvent;
 import com.digitalpersona.onetouch.capture.event.DPFPReaderStatusListener;
 import com.digitalpersona.onetouch.capture.event.DPFPSensorEvent;
 import com.digitalpersona.onetouch.capture.event.DPFPSensorListener;
+import com.digitalpersona.onetouch.processing.DPFPImageQualityException;
 import com.digitalpersona.onetouch.readers.DPFPReadersCollection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,9 +31,9 @@ public class capture {
         events();
         capture.startCapture();
     }
-    
+
     //FINALIZACION DE LA CAPTURA
-    public static void stop(){
+    public static void stop() {
         capture.stopCapture();
     }
 
@@ -38,7 +42,9 @@ public class capture {
         capture.addDataListener(new DPFPDataAdapter() {
             @Override
             public void dataAcquired(final DPFPDataEvent e) {
-                enroller.processCapture(e.getSample());
+                String option = JOptionPane.showInputDialog("Ingresa una opcion");
+                
+                enroller.processCapture(e.getSample());                
             }
         });
 
@@ -53,31 +59,31 @@ public class capture {
             public void readerConnected(DPFPReaderStatusEvent dpfprs) {
                 msj("Sensor conectado");
             }
-
+            
             @Override
             public void readerDisconnected(DPFPReaderStatusEvent dpfprs) {
                 msj("Sensor desconectado");
             }
         });
-
+        
         capture.addSensorListener(new DPFPSensorListener() {
             @Override
             public void fingerTouched(DPFPSensorEvent dpfpse) {
                 msj("El dedo se coloco en el sensor");
             }
-
+            
             @Override
             public void fingerGone(DPFPSensorEvent dpfpse) {
                 msj("El dedo se retiro del sensor");
             }
-
+            
             @Override
             public void imageAcquired(DPFPSensorEvent dpfpse) {
                 throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
         });
     }
-
+    
     private static void msj(String msj) {
         System.out.println(msj);
     }
