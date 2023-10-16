@@ -27,13 +27,18 @@ public class capture {
         events();
         capture.startCapture();
     }
+    
+    //FINALIZACION DE LA CAPTURA
+    public static void stop(){
+        capture.stopCapture();
+    }
 
     //SUSCRIPCION A EVENTOS DEL SENSOR
     private static void events() {
         capture.addDataListener(new DPFPDataAdapter() {
             @Override
             public void dataAcquired(final DPFPDataEvent e) {
-                msj("Huella capturada");
+                enroller.processCapture(e.getSample());
             }
         });
 
