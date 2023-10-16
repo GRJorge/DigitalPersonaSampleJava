@@ -2,7 +2,7 @@ package controller;
 
 /**
  *
- * @author Jorge
+ * @author axdevil
  */
 public class main {
     /**

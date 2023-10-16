@@ -9,15 +9,12 @@ import com.digitalpersona.onetouch.capture.event.DPFPReaderStatusEvent;
 import com.digitalpersona.onetouch.capture.event.DPFPReaderStatusListener;
 import com.digitalpersona.onetouch.capture.event.DPFPSensorEvent;
 import com.digitalpersona.onetouch.capture.event.DPFPSensorListener;
-import com.digitalpersona.onetouch.processing.DPFPImageQualityException;
 import com.digitalpersona.onetouch.readers.DPFPReadersCollection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Jorge
+ * @author axdevil
  */
 public class capture {
     
@@ -39,12 +36,10 @@ public class capture {
 
     //SUSCRIPCION A EVENTOS DEL SENSOR
     private static void events() {
-        capture.addDataListener(new DPFPDataAdapter() {
+        capture.addDataListener(new DPFPDataAdapter() { //Evento de obtencion de datos
             @Override
             public void dataAcquired(final DPFPDataEvent e) {
-                String option = JOptionPane.showInputDialog("Ingresa una opcion");
-                
-                enroller.processCapture(e.getSample());                
+                enroller.processCapture(e.getSample()); //Inicia procesamiento de huella            
             }
         });
 
