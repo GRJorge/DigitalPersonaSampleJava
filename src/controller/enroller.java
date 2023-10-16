@@ -10,7 +10,7 @@ import com.digitalpersona.onetouch.processing.DPFPImageQualityException;
 
 /**
  *
- * @author Jorge
+ * @author axdevil
  */
 public class enroller {
 
@@ -26,13 +26,13 @@ public class enroller {
         if (featuresInscription != null) {
             try {
                 System.out.println("Las Caracteristicas de la Huella han sido creada");
-                enrollment.addFeatures(featuresInscription);
+                enrollment.addFeatures(featuresInscription); //SE CREA UN NUEVO TEMPLATE EN EL ENROLLMENT
             } catch (DPFPImageQualityException ex) {
                 System.err.println("Error: " + ex.getMessage());
             } finally {
                 state();
                 switch (enrollment.getTemplateStatus()) {
-                    case TEMPLATE_STATUS_READY:
+                    case TEMPLATE_STATUS_READY: //Cuando las cuatro huellas estan registradas
                         setTemplate(enrollment.getTemplate());
                         break;
                     case TEMPLATE_STATUS_FAILED:
@@ -48,8 +48,8 @@ public class enroller {
     }
 
     public static void setTemplate(DPFPTemplate Template) {
-        //ESTE DATO ES EL QUE SE GUARDA EN BASE DE DATOS
         template = Template;
+        byte[] templateByte = template.serialize(); //ESTE DATO ES EL QUE SE GUARDA EN BASE DE DATOS
     }
 
     private static void state() {
